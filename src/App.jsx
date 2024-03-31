@@ -6,6 +6,7 @@ import Error from './components/Error'
 import { useEffect } from 'react'
 import { useReducer } from 'react'
 import StartScreen from './components/StartScreen'
+import Question from './components/Question'
 
 const initialState = {
   questions: [],
@@ -22,8 +23,8 @@ const reducer = (state, action) => {
     case 'dataFailed':
       return { ...state, status: 'error' };
 
-    case 'dataReady':
-      return { ...state, status: 'ready' }
+    case 'start':
+      return { ...state, status: 'active' }
 
     default:
       throw new Error("Unknown action");
@@ -50,7 +51,8 @@ function App() {
       <Main className='main'>
         {status === "loading" && <Loader />}
         {status === "error" && <Error />}
-        {status === "ready" && <StartScreen numQuestion={numQuestion} />}
+        {status === "ready" && <StartScreen numQuestion={numQuestion} dispatch={dispatch} />}
+        {status === "active" && <Question />}
       </Main>
     </div>
   )

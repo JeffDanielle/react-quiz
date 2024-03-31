@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import './custom.css'
 import DateCounter from './components/DateCounter'
 

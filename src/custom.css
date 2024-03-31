@@ -8,7 +8,7 @@
   --color-accent: #ffa94d;
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Codystar&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Codystar&display=swap"); */
 
 * {
   margin: 0;
@@ -46,6 +46,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  font-size: 5.6rem;
+  /* font-family: "Codystar", sans-serif; */
+  /* font-weight: 500; */
+  /* font-style: bold; */
+  /* font-size: 60px; */
 }
 
 .error {

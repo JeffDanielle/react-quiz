@@ -1,8 +1,11 @@
 import './custom.css'
 import Header from './components/Header'
 import Main from './components/Main'
+import Loader from './components/Loader'
+import Error from './components/Error'
 import { useEffect } from 'react'
 import { useReducer } from 'react'
+import StartScreen from './components/StartScreen'
 
 const initialState = {
   questions: [],
@@ -19,13 +22,18 @@ const reducer = (state, action) => {
     case 'dataFailed':
       return { ...state, status: 'error' };
 
+    case 'dataReady':
+      return { ...state, status: 'ready' }
+
     default:
       throw new Error("Unknown action");
   }
 }
 
 function App() {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [{ questions, status }, dispatch] = useReducer(reducer, initialState);
+
+  const numQuestion = questions.length
 
   useEffect(() => {
 
@@ -40,8 +48,9 @@ function App() {
       <Header />
 
       <Main className='main'>
-        <p>1/15</p>
-        <p>Question?</p>
+        {status === "loading" && <Loader />}
+        {status === "error" && <Error />}
+        {status === "ready" && <StartScreen numQuestion={numQuestion} />}
       </Main>
     </div>
   )

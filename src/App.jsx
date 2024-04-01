@@ -8,6 +8,7 @@ import { useReducer } from 'react'
 import StartScreen from './components/StartScreen'
 import Question from './components/Question'
 import NextButton from './components/NextButton'
+import Progress from './components/Progress'
 
 const initialState = {
   questions: [],
@@ -50,6 +51,7 @@ function App() {
   const [{ questions, status, index, answer, points }, dispatch] = useReducer(reducer, initialState);
 
   const numQuestion = questions.length
+  const maxPossiblePoints = questions.reduce((prev, curr) => prev + curr.points, 0)
 
   useEffect(() => {
 
@@ -69,6 +71,7 @@ function App() {
         {status === "ready" && <StartScreen numQuestion={numQuestion} dispatch={dispatch} />}
         {status === "active" && (
           <>
+            <Progress index={index} numQuestions={numQuestion} points={points} maxPossiblePoints={maxPossiblePoints} answer={answer} />
             <Question question={questions[index]} dispatch={dispatch} answer={answer} />
             <NextButton dispatch={dispatch} answer={answer} />
           </>
